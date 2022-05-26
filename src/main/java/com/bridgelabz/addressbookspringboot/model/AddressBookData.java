@@ -3,7 +3,7 @@ package com.bridgelabz.addressbookspringboot.model;
 import com.bridgelabz.addressbookspringboot.dto.AddressBookDTO;
 import lombok.Data;
 
-@Data
+@Data                           // Lombak library for getters and setters...
 public class AddressBookData {
   private int personId;
   private String firstName;

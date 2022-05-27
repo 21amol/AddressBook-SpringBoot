@@ -41,4 +41,12 @@ public class AddressBookService {
     addressBookRepo.delete(addressBookData);
   }
 
+  public List<AddressBookData> getContactsByCity(String city) {
+    return addressBookRepo.findContactsByCity(city);
+  }
+
+  public List<AddressBookData> getContactsByState(String state) {
+    return addressBookRepo.findContactsByState(state);
+  }
+
 }

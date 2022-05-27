@@ -1,6 +1,7 @@
 package com.bridgelabz.addressbookspringboot.service;
 
 import com.bridgelabz.addressbookspringboot.dto.AddressBookDTO;
+import com.bridgelabz.addressbookspringboot.exceptions.AddressBookException;
 import com.bridgelabz.addressbookspringboot.model.AddressBookData;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,8 @@ public class AddressBookService {
   }
 
   public AddressBookData getAddressBookById(int personId) {
-    return addressBookDataList.get(personId - 1);
+    return addressBookDataList.stream().filter(addressBookData -> addressBookData.getPersonId() == personId)
+            .findFirst().orElseThrow(() -> new AddressBookException("Address Book Contact Id not Found!!!"));
   }
 
   public AddressBookData addAddressBookData(AddressBookDTO addressBookDTO) {

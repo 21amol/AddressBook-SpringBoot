@@ -18,7 +18,7 @@ public class AddressBookDTO {
   @Pattern(regexp = "^[7-9]{1}[0-9]{9}$", message = "Invalid Phone Number")
   public String phoneNumber;
 
-  @Pattern(regexp = "^[a-z0-9-+]*[.]{0,1}[0-9a-z]@[a-z0-9]+([.][a-z.]+){1,2}$", message = "Invalid Email")
+  @Pattern(regexp = "^([a-z0-9-+]*)[.]{0,1}([0-9a-z]*)@([a-z]+)[.]{1}([a-z]+)$", message = "Invalid Email")
   public String email;
 
   @Pattern(regexp = "^[A-Z]{1}[a-z]{1,}$", message = "Invalid Address")

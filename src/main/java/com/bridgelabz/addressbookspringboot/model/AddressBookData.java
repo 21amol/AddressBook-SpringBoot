@@ -24,7 +24,7 @@ public class AddressBookData {
   private String address;
   private String city;
   private String state;
-  private int zip;
+  private String zip;
 
 
   public AddressBookData() {
@@ -32,7 +32,6 @@ public class AddressBookData {
 
 
   public AddressBookData(AddressBookDTO addressBookDTO) {
-    // this.personId = personId;
     this.firstName = addressBookDTO.firstName;
     this.lastName = addressBookDTO.lastName;
     this.phoneNumber = addressBookDTO.phoneNumber;

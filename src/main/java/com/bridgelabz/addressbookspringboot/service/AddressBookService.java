@@ -15,8 +15,6 @@ public class AddressBookService {
   @Autowired
   AddressBookRepo addressBookRepo;
 
-//  List<AddressBookData> addressBookDataList = new ArrayList<>();
-
   public List<AddressBookData> getAddressBookData() {
     return addressBookRepo.findAll();
   }
@@ -36,16 +34,6 @@ public class AddressBookService {
     AddressBookData addressBookData = this.getAddressBookById(personId);
     addressBookData.updateData(addressBookDTO);
     return addressBookRepo.save(addressBookData);
-//    addressBookData.setFirstName(addressBookDTO.firstName);
-//    addressBookData.setLastName(addressBookDTO.lastName);
-//    addressBookData.setPhoneNumber(addressBookDTO.phoneNumber);
-//    addressBookData.setEmail(addressBookDTO.email);
-//    addressBookData.setAddress(addressBookDTO.address);
-//    addressBookData.setCity(addressBookDTO.city);
-//    addressBookData.setState(addressBookDTO.state);
-//    addressBookData.setZip(addressBookDTO.zip);
-//    addressBookRepo.set(personId - 1, addressBookData);
-
   }
 
   public void deleteAddressBookData(int personId) {

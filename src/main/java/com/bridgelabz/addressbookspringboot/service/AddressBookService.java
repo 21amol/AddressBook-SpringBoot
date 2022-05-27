@@ -3,47 +3,54 @@ package com.bridgelabz.addressbookspringboot.service;
 import com.bridgelabz.addressbookspringboot.dto.AddressBookDTO;
 import com.bridgelabz.addressbookspringboot.exceptions.AddressBookException;
 import com.bridgelabz.addressbookspringboot.model.AddressBookData;
+import com.bridgelabz.addressbookspringboot.repository.AddressBookRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class AddressBookService {
 
-  List<AddressBookData> addressBookDataList = new ArrayList<>();
+  @Autowired
+  AddressBookRepo addressBookRepo;
+
+//  List<AddressBookData> addressBookDataList = new ArrayList<>();
 
   public List<AddressBookData> getAddressBookData() {
-    return addressBookDataList;
+    return addressBookRepo.findAll();
   }
 
   public AddressBookData getAddressBookById(int personId) {
-    return addressBookDataList.stream().filter(addressBookData -> addressBookData.getPersonId() == personId)
-            .findFirst().orElseThrow(() -> new AddressBookException("Address Book Contact Id not Found!!!"));
+    return addressBookRepo.findById(personId)
+            .orElseThrow(() -> new AddressBookException("Address Book Contact Id not Found!!!"));
   }
 
   public AddressBookData addAddressBookData(AddressBookDTO addressBookDTO) {
-    AddressBookData addressBookData = new AddressBookData(addressBookDataList.size() + 1, addressBookDTO);
-    addressBookDataList.add(addressBookData);
+    AddressBookData addressBookData = new AddressBookData(addressBookDTO);
+    addressBookRepo.save(addressBookData);
     return addressBookData;
   }
 
   public AddressBookData editAddressBookData(int personId, AddressBookDTO addressBookDTO) {
     AddressBookData addressBookData = this.getAddressBookById(personId);
-    addressBookData.setFirstName(addressBookDTO.firstName);
-    addressBookData.setLastName(addressBookDTO.lastName);
-    addressBookData.setPhoneNumber(addressBookDTO.phoneNumber);
-    addressBookData.setEmail(addressBookDTO.email);
-    addressBookData.setAddress(addressBookDTO.address);
-    addressBookData.setCity(addressBookDTO.city);
-    addressBookData.setState(addressBookDTO.state);
-    addressBookData.setZip(addressBookDTO.zip);
-    addressBookDataList.set(personId - 1, addressBookData);
-    return addressBookData;
+    addressBookData.updateData(addressBookDTO);
+    return addressBookRepo.save(addressBookData);
+//    addressBookData.setFirstName(addressBookDTO.firstName);
+//    addressBookData.setLastName(addressBookDTO.lastName);
+//    addressBookData.setPhoneNumber(addressBookDTO.phoneNumber);
+//    addressBookData.setEmail(addressBookDTO.email);
+//    addressBookData.setAddress(addressBookDTO.address);
+//    addressBookData.setCity(addressBookDTO.city);
+//    addressBookData.setState(addressBookDTO.state);
+//    addressBookData.setZip(addressBookDTO.zip);
+//    addressBookRepo.set(personId - 1, addressBookData);
+
   }
 
   public void deleteAddressBookData(int personId) {
-    addressBookDataList.remove(personId - 1);
+    AddressBookData addressBookData = this.getAddressBookById(personId);
+    addressBookRepo.delete(addressBookData);
   }
 
 }

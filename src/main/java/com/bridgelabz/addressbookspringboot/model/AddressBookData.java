@@ -3,9 +3,20 @@ package com.bridgelabz.addressbookspringboot.model;
 import com.bridgelabz.addressbookspringboot.dto.AddressBookDTO;
 import lombok.Data;
 
+import javax.persistence.*;
+
 @Data                           // Lombak library for getters and setters...
+@Entity
+@Table(name = "address_book")
+
 public class AddressBookData {
+
+  @Id
+  @GeneratedValue
+
+  @Column(name = "id")
   private int personId;
+
   private String firstName;
   private String lastName;
   private String phoneNumber;

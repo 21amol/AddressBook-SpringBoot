@@ -23,4 +23,10 @@ public class AddressBookExceptionHandler {
     ResponseDTO responseDTO = new ResponseDTO("Exception while processing REST request",errorMessage);
     return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
   }
+
+  @ExceptionHandler(AddressBookException.class)
+  public ResponseEntity<ResponseDTO> handleMethodArgumentNotValidException(AddressBookException exception){
+    ResponseDTO responseDTO = new ResponseDTO("Exception while processing REST request",exception.getMessage());
+    return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
+  }
 }

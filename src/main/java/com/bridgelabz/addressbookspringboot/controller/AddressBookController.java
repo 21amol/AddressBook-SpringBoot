@@ -57,16 +57,16 @@ public class AddressBookController {
     return new ResponseEntity<>(responseDTO, HttpStatus.OK);
   }
 
-  @GetMapping(value = {"/city/{city}"})
-  public ResponseEntity<ResponseDTO> getContactsByCity(@PathVariable String city) {
-    List<AddressBookData> addressBookDataList = addressBookService.getContactsByCity(city);
+  @GetMapping(value = {"/city"})
+  public ResponseEntity<ResponseDTO> getContactsByCity() {
+    List<AddressBookData> addressBookDataList = addressBookService.getContactsByCity();
     ResponseDTO responseDTO = new ResponseDTO("Success call for City!!!", addressBookDataList);
     return new ResponseEntity<>(responseDTO, HttpStatus.OK);
   }
 
-  @GetMapping(value = {"/state/{state}"})
-  public ResponseEntity<ResponseDTO> getContactsByState(@PathVariable String state) {
-    List<AddressBookData> addressBookDataList = addressBookService.getContactsByState(state);
+  @GetMapping(value = {"/state"})
+  public ResponseEntity<ResponseDTO> getContactsByState() {
+    List<AddressBookData> addressBookDataList = addressBookService.getContactsByState();
     ResponseDTO responseDTO = new ResponseDTO("Success call for State!!!", addressBookDataList);
     return new ResponseEntity<>(responseDTO, HttpStatus.OK);
   }
